@@ -1,0 +1,22 @@
+# Virtual environments
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment variables
+.env
+.env.*
+.envrc
+
+# Database
+*.db
+
+# OS files
+.DS_Store
+
+# Claude
+.claude/plans/
