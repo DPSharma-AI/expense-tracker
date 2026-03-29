@@ -17,7 +17,7 @@
         </p>
         <div class="hero-actions">
             <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
-            <a href="#" class="btn-primary">See how it works</a>
+            <a href="#" id="demo-btn" class="btn-primary">See how it works</a>
         </div>
     </div>
     <div class="hero-visual">
@@ -99,5 +99,106 @@
         <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
     </div>
 </section>
+
+<div id="demo-modal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <button id="modal-close" class="modal-close">×</button>
+        <div class="modal-video">
+            <iframe id="demo-video" width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Spendly Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+    }
+
+    .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+        position: relative;
+        background: var(--paper-card);
+        border-radius: var(--radius-lg);
+        width: 90%;
+        max-width: 800px;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 32px;
+        height: 32px;
+        background: rgba(0, 0, 0, 0.6);
+        border: none;
+        color: white;
+        font-size: 1.75rem;
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: background 0.2s;
+    }
+
+    .modal-close:hover {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-video {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<script>
+    const demoBtn = document.getElementById('demo-btn');
+    const demoModal = document.getElementById('demo-modal');
+    const modalOverlay = demoModal.querySelector('.modal-overlay');
+    const modalClose = document.getElementById('modal-close');
+    const demoVideo = document.getElementById('demo-video');
+
+    function openModal() {
+        demoModal.classList.add('active');
+    }
+
+    function closeModal() {
+        demoModal.classList.remove('active');
+        // Stop video playback
+        demoVideo.src = demoVideo.src;
+    }
+
+    demoBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openModal();
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', closeModal);
+</script>
 
 {% endblock %}
